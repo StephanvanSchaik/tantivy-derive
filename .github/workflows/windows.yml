@@ -1,0 +1,23 @@
+name: Microsoft Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build tantivy-derive
+      run: cargo build
+    - name: Build basic_search example
+      run: cargo build --example basic_search
+    - name: Run basic_search example
+      run: cargo run --example basic_search
