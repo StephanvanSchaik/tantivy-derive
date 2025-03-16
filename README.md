@@ -4,7 +4,7 @@ tantivy-derive provides macros to generate the code to convert structs from and 
 
 When using tantivy, it is common to build a schema as follows:
 
-```
+```rust
 let mut schema_builder = Schema::builder();
 
 schema_builder.add_text_field("title", TEXT | STORED);
@@ -15,7 +15,7 @@ let schema = schema_builder.build();
 
 It is also possible to add a document as follows:
 
-```
+```rust
 let title = schema.get_field("title").unwrap();
 let body = schema.get_field("body").unwrap();
 
@@ -36,7 +36,7 @@ While tantivy does provide a `doc!` macro to reduce the boilerplate a bit when a
 tantivy-derive relies on the [darling](https://crates.io/crates/darling) crate to provide an experience similar to what [serde](https://crates.io/crates/serde) offers to serialize and deserialize documents.
 With tantivy-derive you can represent the document above as follows:
 
-```
+```rust
 use tantivy_derive::{Schema, tantivy_document};
 
 #[tantivy_document]
@@ -56,13 +56,13 @@ pub struct Document {
 
 The schema for `Document` can simply be built as follows:
 
-```
+```rust
 let schema = Document::schema();
 ```
 
 A document can be added as follows:
 
-```
+```rust
 let document = Document {
 _title: "The Old Man and the Sea".to_string(),
 body: "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone \
@@ -75,7 +75,7 @@ index_writer.add_document(document.into())?;
 
 Finally, a document can be retrieved from the tantivy database and converted back into a `StoredDocument` as follows:
 
-```
+```rust
 let retrieved_doc: TantivyDocument = searcher.doc(doc_address)?;
 let document: StoredDocument = retrieved_doc.into();
 println!("{document:?}");
