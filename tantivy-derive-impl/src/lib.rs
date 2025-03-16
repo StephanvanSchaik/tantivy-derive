@@ -307,12 +307,12 @@ impl ToTokens for Document {
                 }
             }
 
-            impl #impl_generics std::convert::Into<tantivy::schema::TantivyDocument> for #name #ty_generics #where_clause {
-                fn into(self) -> tantivy::schema::TantivyDocument {
+            impl #impl_generics std::convert::From<#name> for tantivy::schema::TantivyDocument #ty_generics #where_clause {
+                fn from(value: #name) -> tantivy::schema::TantivyDocument {
                     use tantivy_derive::Field as _;
 
                     let mut document = tantivy::schema::TantivyDocument::new();
-                    #name::insert_into_document(&mut document, 0, &self);
+                    #name::insert_into_document(&mut document, 0, &value);
                     document
                 }
             }
