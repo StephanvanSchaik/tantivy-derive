@@ -2,6 +2,11 @@
 name = "tantivy-derive"
 version = "0.1.0"
 edition = "2021"
+description = "Generate code to converts struct from and to tantivy documents"
+license = "MIT OR Apache-2.0"
+readme = "../README.md"
+documentation = "https://docs.rs/tantivy-derive"
+repository = "https://github.com/StephanvanSchaik/tantivy-derive"
 
 [dependencies]
 bytes = { version = "1", optional = true }

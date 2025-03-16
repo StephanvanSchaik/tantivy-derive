@@ -2,6 +2,11 @@
 name = "tantivy-derive-impl"
 version = "0.1.0"
 edition = "2021"
+description = "Macro implementation of tantivy-derive"
+license = "MIT OR Apache-2.0"
+readme = "../README.md"
+documentation = "https://docs.rs/tantivy-derive-impl"
+repository = "https://github.com/StephanvanSchaik/tantivy-derive"
 
 [lib]
 proc-macro = true
