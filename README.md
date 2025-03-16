@@ -81,4 +81,4 @@ let document: StoredDocument = retrieved_doc.into();
 println!("{document:?}");
 ```
 
-[basic\_search.rs](./examples/basic_search.rs) provides a more elaborate example of how to use tantivy-derive.
+[basic\_search.rs](./tantivy-derive/examples/basic_search.rs) provides a more elaborate example of how to use tantivy-derive.
