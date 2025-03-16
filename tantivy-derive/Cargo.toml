@@ -15,7 +15,7 @@ jiff = { version = "0.2", optional = true }
 rust_decimal = { version = "1", optional = true }
 serde = { version = "1", optional = true }
 tantivy = "0.22"
-tantivy-derive-impl = { path = "../tantivy-derive-impl" }
+tantivy-derive-impl = "0.1"
 url = { version = "2", optional = true }
 uuid = { version = "1", optional = true }
 
