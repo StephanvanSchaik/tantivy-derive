@@ -1,4 +1,4 @@
-# About
+# tantivy-derive
 
 tantivy-derive provides macros to generate the code to convert structs from and to `TantivyDocument` objects as well as to build the corresponding database schema to avoid having to write this boilerplate yourself.
 
@@ -64,10 +64,10 @@ A document can be added as follows:
 
 ```rust
 let document = Document {
-_title: "The Old Man and the Sea".to_string(),
-body: "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone \
-    eight-four-days now without taking a fish."
-    .to_string(),
+    _title: "The Old Man and the Sea".to_string(),
+    body: "He was an old man who fished alone in a skiff in the Gulf Stream and he had gone \
+        eight-four-days now without taking a fish."
+        .to_string(),
 };
 
 index_writer.add_document(document.into())?;
