@@ -80,3 +80,5 @@ let retrieved_doc: TantivyDocument = searcher.doc(doc_address)?;
 let document: StoredDocument = retrieved_doc.into();
 println!("{document:?}");
 ```
+
+[basic\_search.rs](./examples/basic_search.rs) provides a more elaborate example of how to use tantivy-derive.
