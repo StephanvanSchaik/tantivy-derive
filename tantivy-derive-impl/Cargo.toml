@@ -1,0 +1,14 @@
+[package]
+name = "tantivy-derive-impl"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+darling = "0.20"
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["extra-traits"] }
+tantivy = "0.22"

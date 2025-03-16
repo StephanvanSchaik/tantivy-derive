@@ -1,0 +1,3 @@
+[workspace]
+members = ["tantivy-derive", "tantivy-derive-impl"]
+resolver = "1"

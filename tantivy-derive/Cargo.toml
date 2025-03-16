@@ -1,0 +1,28 @@
+[package]
+name = "tantivy-derive"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bytes = { version = "1", optional = true }
+chrono = { version = "0.4", optional = true }
+jiff = { version = "0.2", optional = true }
+rust_decimal = { version = "1", optional = true }
+serde = { version = "1", optional = true }
+tantivy = "0.22"
+tantivy-derive-impl = { path = "../tantivy-derive-impl" }
+url = { version = "2", optional = true }
+uuid = { version = "1", optional = true }
+
+[dev-dependencies]
+tempfile = "3"
+
+[features]
+bytes = ["dep:bytes"]
+chrono = ["dep:chrono"]
+default = ["bytes", "chrono", "decimal", "jiff", "serde", "url", "uuid"]
+decimal = ["rust_decimal"]
+jiff = ["dep:jiff"]
+serde = ["dep:serde"]
+url = ["dep:url"]
+uuid = ["dep:uuid"]
