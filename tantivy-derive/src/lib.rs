@@ -37,7 +37,7 @@ where
 
         document
             .get_first(field)
-            .and_then(|v| Self::map_value(v))
+            .and_then(|v| Self::map_value(&v.into()))
     }
 }
 
@@ -147,7 +147,7 @@ impl Mappable for String {
 }
 
 impl Field for Facet {
-    type Target = Self;
+    type Target = String;
 
     fn add_field(builder: &mut SchemaBuilder, name: &str, options: FieldOptions) {
         let options: FacetOptions = options.into();
@@ -163,7 +163,7 @@ impl Field for Facet {
 
 impl Mappable for Facet {
     fn map_value(value: &OwnedValue) -> Option<Self::Target> {
-        value.as_facet().cloned()
+        Some(value.as_facet()?.to_string())
     }
 }
 
@@ -206,7 +206,7 @@ impl<T: Mappable<Target = T>> Extractable for Option<T> {
     fn extract_from_document(document: &TantivyDocument, field_id: u32) -> Option<Self::Target> {
         let field = tantivy::schema::Field::from_field_id(field_id);
 
-        Some(document.get_first(field).and_then(|v| T::map_value(v)))
+        Some(document.get_first(field).and_then(|v| T::map_value(&v.into())))
     }
 }
 
@@ -235,7 +235,7 @@ where
     fn extract_from_document(document: &TantivyDocument, field_id: u32) -> Option<Self::Target> {
         let field = tantivy::schema::Field::from_field_id(field_id);
 
-        document.get_all(field).map(|v| T::map_value(v)).collect()
+        document.get_all(field).map(|v| T::map_value(&v.into())).collect()
     }
 }
 
@@ -343,7 +343,7 @@ mod decimal {
             let field = tantivy::schema::Field::from_field_id(field_id);
             let slice = Decimal::serialize(value);
 
-            document.add_bytes(field, slice);
+            document.add_bytes(field, &slice);
         }
     }
 

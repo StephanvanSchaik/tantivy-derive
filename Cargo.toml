@@ -12,7 +12,7 @@ quote = "1"
 rust_decimal = "1"
 serde = "1"
 syn = { version = "2", features = ["extra-traits"] }
-tantivy = "0.22"
+tantivy = "0.24"
 tempfile = "3"
 url = "2"
 uuid = "1"
