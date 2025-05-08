@@ -46,7 +46,7 @@ impl Field {
     ) {
         let Field {
             ident,
-            ref ty,
+            ty,
             coerce,
             fast,
             fieldnorms,
@@ -195,7 +195,7 @@ impl Field {
     fn parse_stored(&self) -> TokenStream {
         let Field {
             ident,
-            ref ty,
+            ty,
             stored,
             store_target,
             ..
