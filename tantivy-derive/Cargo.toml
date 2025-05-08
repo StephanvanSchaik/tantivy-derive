@@ -1,6 +1,6 @@
 [package]
 name = "tantivy-derive"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "Generate code to converts struct from and to tantivy documents"
 license = "MIT OR Apache-2.0"
@@ -15,7 +15,7 @@ jiff = { workspace = true, optional = true }
 rust_decimal = { workspace = true, optional = true }
 serde = { workspace = true, optional = true }
 tantivy.workspace = true
-tantivy-derive-impl = "0.1"
+tantivy-derive-impl = "0.2"
 url = { workspace = true, optional = true }
 uuid = { workspace = true, optional = true }
 
