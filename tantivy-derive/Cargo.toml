@@ -9,18 +9,18 @@ documentation = "https://docs.rs/tantivy-derive"
 repository = "https://github.com/StephanvanSchaik/tantivy-derive"
 
 [dependencies]
-bytes = { version = "1", optional = true }
-chrono = { version = "0.4", optional = true }
-jiff = { version = "0.2", optional = true }
-rust_decimal = { version = "1", optional = true }
-serde = { version = "1", optional = true }
-tantivy = "0.22"
+bytes = { workspace = true, optional = true }
+chrono = { workspace = true, optional = true }
+jiff = { workspace = true, optional = true }
+rust_decimal = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+tantivy.workspace = true
 tantivy-derive-impl = "0.1"
-url = { version = "2", optional = true }
-uuid = { version = "1", optional = true }
+url = { workspace = true, optional = true }
+uuid = { workspace = true, optional = true }
 
 [dev-dependencies]
-tempfile = "3"
+tempfile.workspace = true
 
 [features]
 bytes = ["dep:bytes"]
