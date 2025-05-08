@@ -1,7 +1,7 @@
-use darling::{ast, util, FromDeriveInput, FromField};
+use darling::{FromDeriveInput, FromField, ast, util};
 use proc_macro2::TokenStream;
-use quote::{format_ident, quote, ToTokens};
-use syn::{parse_macro_input, DeriveInput, Ident, Type};
+use quote::{ToTokens, format_ident, quote};
+use syn::{DeriveInput, Ident, Type, parse_macro_input};
 
 #[derive(Debug, FromField)]
 #[darling(attributes(tantivy))]
@@ -399,7 +399,7 @@ pub fn tantivy_document(
     args: proc_macro::TokenStream,
     input: proc_macro::TokenStream,
 ) -> proc_macro::TokenStream {
-    use syn::{punctuated::Punctuated, Meta};
+    use syn::{Meta, punctuated::Punctuated};
     let args = parse_macro_input!(args with Punctuated::<Meta, syn::Token![,]>::parse_terminated);
     let mut input = parse_macro_input!(input as DeriveInput);
     let mut struct_name = format_ident!("Stored{}", input.ident);

@@ -2,7 +2,7 @@ mod options;
 
 use std::net::Ipv6Addr;
 use tantivy::schema::*;
-pub use tantivy_derive_impl::{tantivy_document, Document};
+pub use tantivy_derive_impl::{Document, tantivy_document};
 
 pub use crate::options::FieldOptions;
 
@@ -206,7 +206,11 @@ impl<T: Mappable<Target = T>> Extractable for Option<T> {
     fn extract_from_document(document: &TantivyDocument, field_id: u32) -> Option<Self::Target> {
         let field = tantivy::schema::Field::from_field_id(field_id);
 
-        Some(document.get_first(field).and_then(|v| T::map_value(&v.into())))
+        Some(
+            document
+                .get_first(field)
+                .and_then(|v| T::map_value(&v.into())),
+        )
     }
 }
 
@@ -235,7 +239,10 @@ where
     fn extract_from_document(document: &TantivyDocument, field_id: u32) -> Option<Self::Target> {
         let field = tantivy::schema::Field::from_field_id(field_id);
 
-        document.get_all(field).map(|v| T::map_value(&v.into())).collect()
+        document
+            .get_all(field)
+            .map(|v| T::map_value(&v.into()))
+            .collect()
     }
 }
 
@@ -349,18 +356,16 @@ mod decimal {
 
     impl Mappable for Decimal {
         fn map_value(value: &OwnedValue) -> Option<Self::Target> {
-            value
-                .as_bytes()
-                .and_then(|bytes| {
-                    if bytes.len() != 16 {
-                        return None;
-                    }
+            value.as_bytes().and_then(|bytes| {
+                if bytes.len() != 16 {
+                    return None;
+                }
 
-                    let mut slice = [0u8; 16];
-                    slice.copy_from_slice(&bytes[..16]);
+                let mut slice = [0u8; 16];
+                slice.copy_from_slice(&bytes[..16]);
 
-                    Some(Decimal::deserialize(slice))
-                })
+                Some(Decimal::deserialize(slice))
+            })
         }
     }
 
