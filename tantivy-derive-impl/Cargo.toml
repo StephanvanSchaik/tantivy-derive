@@ -1,7 +1,7 @@
 [package]
 name = "tantivy-derive-impl"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 description = "Macro implementation of tantivy-derive"
 license = "MIT OR Apache-2.0"
 readme = "../README.md"

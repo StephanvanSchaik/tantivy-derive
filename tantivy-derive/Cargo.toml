@@ -1,7 +1,7 @@
 [package]
 name = "tantivy-derive"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 description = "Generate code to converts struct from and to tantivy documents"
 license = "MIT OR Apache-2.0"
 readme = "../README.md"
