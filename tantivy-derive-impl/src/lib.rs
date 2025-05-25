@@ -46,7 +46,6 @@ impl Field {
         TokenStream,
     ) {
         let Field {
-            vis,
             ident,
             ty,
             coerce,
@@ -82,7 +81,7 @@ impl Field {
         };
 
         let field_token = if *stored {
-            quote! { #vis #ident, }
+            quote! { #ident, }
         } else {
             TokenStream::new()
         };
