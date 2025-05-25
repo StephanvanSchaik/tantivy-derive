@@ -1,11 +1,12 @@
 use darling::{FromDeriveInput, FromField, ast, util};
 use proc_macro2::TokenStream;
 use quote::{ToTokens, format_ident, quote};
-use syn::{DeriveInput, Ident, Type, parse_macro_input};
+use syn::{DeriveInput, Ident, Type, Visibility, parse_macro_input};
 
 #[derive(Debug, FromField)]
 #[darling(attributes(tantivy))]
 struct Field {
+    vis: Visibility,
     ident: Option<Ident>,
     ty: Type,
     #[darling(default)]
@@ -45,6 +46,7 @@ impl Field {
         TokenStream,
     ) {
         let Field {
+            vis,
             ident,
             ty,
             coerce,
@@ -80,7 +82,7 @@ impl Field {
         };
 
         let field_token = if *stored {
-            quote! { #ident, }
+            quote! { #vis #ident, }
         } else {
             TokenStream::new()
         };
@@ -194,6 +196,7 @@ impl Field {
 
     fn parse_stored(&self) -> TokenStream {
         let Field {
+            vis,
             ident,
             ty,
             stored,
@@ -204,11 +207,11 @@ impl Field {
         if *stored {
             if let Some(target) = store_target {
                 quote! {
-                    #ident: #target,
+                    #vis #ident: #target,
                 }
             } else {
                 quote! {
-                    #ident: #ty,
+                    #vis #ident: #ty,
                 }
             }
         } else {
@@ -450,9 +453,9 @@ mod tests {
         let input = r#"#[derive(Debug)]
         pub struct Document {
             #[tantivy(stored, text)]
-            title: String,
+            pub title: String,
             #[tantivy(text)]
-            body: String,
+            pub body: String,
         }"#;
         let parsed = syn::parse_str(input).unwrap();
         let receiver = StoredDocument::from_derive_input(&parsed).unwrap();
